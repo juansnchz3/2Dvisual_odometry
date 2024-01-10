@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<launch>
+  <master auto="start"/>
+
+  <node pkg="rviz" type="rviz" name="rviz"
+    args="-d $(find track_vo)/rviz/track.rviz"/> 
+
+  <node pkg="track_vo" type="track_piloting" name="track_piloting" output="screen" >
+    <rosparam file= "$(find track_vo)/config/camera.yaml" command="load" />
+  </node>
+
+  <node pkg="track_vo" type="ground_truth" name="ground_truth" output="screen" >
+		<param name="XY" value="-255"/> 
+		<param name="XZ" value="0"/>  
+    <param name="path_topic" value="/homo/path"/> 
+  </node> 
+
+</launch>
